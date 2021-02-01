@@ -1,24 +1,23 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaneMove : MonoBehaviour
+public class Move : MonoBehaviour
 {
-    public float speed = 30.0f;
-    public float turnSpeed = 40.0f;
-    public float hInput;
-    public float fInput;
+    private float speed = 30.0f;
+    private float turnSpeed = 35.0f;
+    private float hInput;
+    private float fInput;
 
     // Update is called once per frame
     void Update()
     {
-        //Inputs for getting the plane to tilt up and down
-        fInput = Input.GetAxis("Vertical");
-        //Inputs for getting plane to move forward and backwards
+        //gathers inputs for controls
         hInput = Input.GetAxis("Horizontal");
-        //Code for actually getting the plane to go back and forth
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * hInput);
-        //Code for plane tilting up and down
-        transform.Rotate(Vector3.right * Time.deltaTime * turnSpeed * fInput);
+        fInput = Input.GetAxis("Vertical");
+        //makes the vehicle go forward
+        transform.Translate(Vector3.forward * Time.deltaTime * speed * fInput);
+        //makes the vehicle go side to side
+        transform.Rotate(Vector3.up, turnSpeed * hInput * Time.deltaTime);
     }
 }
