@@ -439,7 +439,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animalPrefabs:
   - {fileID: 4206620853537543313, guid: f812a2932cb99964dbe8b7021a7f4420, type: 3}
-  animalIndex: 0
 --- !u!4 &510215740
 Transform:
   m_ObjectHideFlags: 0
@@ -507,7 +506,7 @@ Camera:
   far clip plane: 1000
   field of view: 45
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 10.52
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
