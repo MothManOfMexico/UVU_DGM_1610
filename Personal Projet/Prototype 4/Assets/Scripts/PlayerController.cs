@@ -7,10 +7,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     public float speed;
     private GameObject focalPoint;
-    
-
     public bool hasPowerup;
     public float powerupStrength = 16.0f;
+    public GameObject powerupIndicator;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +23,8 @@ public class PlayerController : MonoBehaviour
     {
         float forwardInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * speed * Time.deltaTime);
+
+        powerupIndicator.transform.position = transform.position + new Vector3 (0, 0.5f, 0);
     }
 
     //this block of code allows player to pickup powerup
@@ -36,19 +37,20 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Powerup Collected!");
 
             StartCoroutine(PowerupCountdownRoutine());
+            powerupIndicator.gameObject.SetActive(true);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Enemy") && hasPowerUp)
+        if(collision.gameObject.CompareTag("Enemy") && hasPowerup)
         {
             //Gets the enemies rigidbody component so we can have access to its physics properties
             Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
             //Gets the position of the enemy in relation to the player
             Vector3 awayFromPlayer = (collision.gameObject.transform.position - transform.position);
             //Report player collision with pick up
-            Debug.Log("Player has collided with " + collision.gameObject + " powerup set to " + hasPowerup);
+            Debug.Log("Player has collided with " + collision.gameObject + " with powerup set to " + hasPowerup);
             //On Collision kicks enemy back
             enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
         }
@@ -56,6 +58,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator PowerupCountdownRoutine()
     {
         yield return new WaitForSeconds(7); hasPowerup = false;
+        powerupIndicator.gameObject.SetActive(false);
     }
 
 }

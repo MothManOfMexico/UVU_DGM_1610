@@ -28,9 +28,10 @@ public class SpawnManager : MonoBehaviour
         if(enemyCount == 0)
         {
             waveNumber ++;
-            SpawnEnemyWave(waveNumber);
-             //create powerup for player to collect
-        Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
+            SpawnEnemyWave(waveNumber); 
+
+            //creates additional powerups for player to collect
+            Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
         }
     }
 
