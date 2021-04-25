@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 20.0f;
     public float hInput;
-    public float xRange = 20;
+    public float xRange = 10;
 
     // Start is called before the first frame update
     void Start()
